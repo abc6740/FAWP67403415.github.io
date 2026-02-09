@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>India Weather App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing:border-box; font-family:Poppins,sans-serif; }
+
+body {
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#43cea2,#185a9d);
+  transition:.4s;
+}
+body.dark {
+  background:linear-gradient(135deg,#232526,#414345);
+}
+
+.container {
+  width:100%;
+  max-width:440px;
+  background:rgba(255,255,255,.93);
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.3);
+  text-align:center;
+}
+body.dark .container { background:#1e1e1e; color:#eee; }
+
+.top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+input {
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  margin-top:10px;
+}
+
+#suggestions {
+  background:#fff;
+  border-radius:8px;
+  overflow:hidden;
+}
+body.dark #suggestions { background:#333; }
+
+.suggestion {
+  padding:10px;
+  cursor:pointer;
+}
+.suggestion:hover { background:#e0f2f1; }
+
+button {
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#43cea2;
+  color:#fff;
+  cursor:pointer;
+}
+
+.weather-box {
+  margin-top:15px;
+  padding:15px;
+  border-radius:15px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+
+.forecast {
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin-top:10px;
+}
+.forecast div {
+  background:rgba(255,255,255,.25);
+  padding:8px;
+  border-radius:10px;
+  min-width:80px;
+  font-size:13px;
+}
+
+/* ===== ADDED ONLY ===== */
+
+/* Go Back button */
+.go-back {
+  background:#185a9d;
+}
+
+/* Sunny animation */
+.sunny::before {
+  content:"☀️";
+  font-size:60px;
+  position:absolute;
+  top:-10px;
+  right:10px;
+  animation:spin 6s linear infinite;
+}
+@keyframes spin {
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+/* Cool animation */
+.cool::before {
+  content:"☁️";
+  font-size:50px;
+  position:absolute;
+  top:10px;
+  left:-60px;
+  animation:cloudMove 8s linear infinite;
+}
+@keyframes cloudMove {
+  from{left:-60px;}
+  to{left:100%;}
+}
+
+/* Rainy animation */
+.rainy::after {
+  content:"🌧️ 🌧️ 🌧️";
+  position:absolute;
+  bottom:10px;
+  left:0;
+  right:0;
+  animation:rain 1s linear infinite;
+}
+@keyframes rain {
+  from{opacity:.3;}
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="top">
+    <h3>🌦 India Weather</h3>
+    <div onclick="toggleDark()">🌙</div>
+  </div>
+
+  <input id="cityInput" placeholder="Enter village or city">
+
+  <div id="suggestions"></div>
+
+  <button onclick="getMyLocation()">📍 Use My Location</button>
+  <button onclick="toggleUnit()">🌡 Toggle °C / °F</button>
+
+  <div id="weatherResult"></div>
+</div>
+
+<script>
+const API_KEY = "23f9683c6b122e966443699e580ebc83";
+let unit = "metric"; // metric / imperial
+
+class WeatherApp {
+  constructor() {
+    this.input = cityInput;
+    this.suggestions = suggestions;
+    this.result = weatherResult;
+    this.input.addEventListener("input",()=>this.search());
+    this.loadCache();
+  }
+
+  async search() {
+    const q = this.input.value.trim();
+    if(q.length<3){this.suggestions.innerHTML="";return;}
+
+    const res = await fetch(
+      `https://api.openweathermap.org/geo/1.0/direct?q=${q},IN&limit=5&appid=${API_KEY}`
+    );
+    const data = await res.json();
+    this.show(data.filter(p=>p.country==="IN"));
+  }
+
+  show(list){
+    this.suggestions.innerHTML="";
+    list.forEach(p=>{
+      const d=document.createElement("div");
+      d.className="suggestion";
+      d.innerText=`${p.name}, ${p.state||""}`;
+      d.onclick=()=>{
+        this.input.value=p.name;
+        this.suggestions.innerHTML="";
+        this.getWeather(p.lat,p.lon,p.name);
+      };
+      this.suggestions.appendChild(d);
+    });
+  }
+
+  async getWeather(lat,lon,name){
+    const w = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${unit}&appid=${API_KEY}`
+    ).then(r=>r.json());
+
+    const f = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${unit}&appid=${API_KEY}`
+    ).then(r=>r.json());
+
+    localStorage.setItem("weatherCache",JSON.stringify({w,f,name,lat,lon,unit}));
+    this.display(w,f,name);
+  }
+
+display(w,f,name){
+  this.input.value = "";   // ← clears the text box
+    let bg="#4fc3f7";
+    let weatherClass="cool";
+
+    if(w.weather[0].main.includes("Clear")){
+      bg="#fbc02d";
+      weatherClass="sunny";
+    }
+    if(w.weather[0].main.includes("Cloud")){
+      bg="#90a4ae";
+      weatherClass="cool";
+    }
+    if(w.weather[0].main.includes("Rain")){
+      weatherClass="rainy";
+    }
+
+    this.result.innerHTML=`
+      <div class="weather-box ${weatherClass}" style="background:${bg}">
+        <h3>${name}, India</h3>
+        <img src="https://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png">
+        <p>${w.main.temp}° ${unit==="metric"?"C":"F"}</p>
+        <p>${w.weather[0].description}</p>
+
+        <div class="forecast">
+          ${f.list.filter((_,i)=>i%8===0).map(d=>`
+            <div>
+              ${new Date(d.dt_txt).toLocaleDateString("en-IN",{weekday:"short"})}<br>
+              ${d.main.temp}°
+            </div>`).join("")}
+        </div>
+
+        <!-- ADDED ONLY -->
+        <button class="go-back" onclick="goBack()">⬅ Go Back</button>
+      </div>
+    `;
+  }
+
+  loadCache(){
+    const c=localStorage.getItem("weatherCache");
+    if(!c) return;
+    const {w,f,name}=JSON.parse(c);
+    this.display(w,f,name);
+  }
+}
+
+const app=new WeatherApp();
+
+function toggleDark(){document.body.classList.toggle("dark");}
+function toggleUnit(){unit=unit==="metric"?"imperial":"metric";}
+function getMyLocation(){
+  navigator.geolocation.getCurrentPosition(p=>{
+    app.getWeather(p.coords.latitude,p.coords.longitude,"Your Location");
+  });
+}
+
+/* ===== ADDED ONLY ===== */
+function goBack(){
+  window.history.back();
+}
+</script>
+
+</body>
+</html>

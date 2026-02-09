@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Black Soil Crops</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f8f4;
+      margin: 0;
+    }
+    .center-img {
+  width: 100%;          /* responsive */
+  max-width: 600px;     /* controls size */
+  height: auto;         /* keeps ratio */
+  display: block;       /* allows margin auto */
+  margin: 20px auto;    /* centers image */
+  border-radius: 12px;  /* optional: smooth look */
+}
+
+
+    header {
+      background-color: #1b5e20;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .crop-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .crop-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .emoji {
+      font-size: 32px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .info-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🖤 Black Soil</h1>
+  <p>All crops grown in Black Soil</p>
+
+</header>
+  <img src="blacksoil.jpeg" class="center-img" alt="Crops grown in black soil">
+
+
+<div class="container">
+
+  <div class="info-box">
+    <p>
+      Black soil is rich in nutrients and has excellent moisture-holding capacity.
+      It is ideal for cotton and many commercial crops.
+    </p>
+  </div>
+
+  <!-- CROPS -->
+  <div class="crop-cards">
+    <div class="crop-card" onclick="showCrop('cotton')"><div class="emoji">🌿</div><h4>Cotton</h4></div>
+    <div class="crop-card" onclick="showCrop('wheat')"><div class="emoji">🌾</div><h4>Wheat</h4></div>
+    <div class="crop-card" onclick="showCrop('sugarcane')"><div class="emoji">🍬</div><h4>Sugarcane</h4></div>
+    <div class="crop-card" onclick="showCrop('maize')"><div class="emoji">🌽</div><h4>Maize</h4></div>
+    <div class="crop-card" onclick="showCrop('sunflower')"><div class="emoji">🌻</div><h4>Sunflower</h4></div>
+    <div class="crop-card" onclick="showCrop('rice')"><div class="emoji">🍚</div><h4>Rice</h4></div>
+    <div class="crop-card" onclick="showCrop('chickpea')"><div class="emoji">🫘</div><h4>Chickpea</h4></div>
+    <div class="crop-card" onclick="showCrop('pigeonpea')"><div class="emoji">🫘</div><h4>Pigeon Pea</h4></div>
+    <div class="crop-card" onclick="showCrop('groundnut')"><div class="emoji">🥜</div><h4>Groundnut</h4></div>
+    <div class="crop-card" onclick="showCrop('tomato')"><div class="emoji">🍅</div><h4>Tomato</h4></div>
+  </div>
+
+  <div id="cropInfo" class="info-box"></div>
+
+<button onclick="history.back()">⬅ Back to Previous Page</button>
+
+</div>
+
+<script>
+function showCrop(crop) {
+  const info = document.getElementById("cropInfo");
+
+  if (crop === "cotton") {
+    info.innerHTML = `
+      <h2>🌿 Cotton Crop</h2>
+      <p>Cotton is a major cash crop mainly grown in black soil.</p>
+      <ul>
+        <li>🖤 Best Soil: Black Soil</li>
+        <li>🌡 Climate: 21°C – 30°C</li>
+        <li>💧 Water: Moderate</li>
+        <li>🌱 Sowing Time: June – July</li>
+        <li>⏳ Harvest Time: 150 – 180 days</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Bollworm</li>
+        <li>Aphids</li>
+        <li>Whitefly</li>
+        <li>Thrips</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Emamectin Benzoate – Bollworm</li>
+        <li>Imidacloprid – Aphids</li>
+        <li>Thiamethoxam – Thrips & Whitefly</li>
+      </ul>
+    `;
+  }
+
+  if (crop === "wheat") {
+    info.innerHTML = `
+      <h2>🌾 Wheat Crop</h2>
+      <p>Wheat is a major food crop grown in black and alluvial soils.</p>
+      <ul>
+        <li>🌱 Best Soil: Black, Alluvial</li>
+        <li>🌡 Climate: 10°C – 25°C</li>
+        <li>💧 Water: Moderate</li>
+        <li>🌱 Sowing: Oct – Nov</li>
+        <li>⏳ Harvest: Mar – Apr</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Aphids</li>
+        <li>Armyworm</li>
+        <li>Termites</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Imidacloprid – Aphids</li>
+        <li>Lambda Cyhalothrin – Armyworm</li>
+        <li>Chlorpyrifos – Termites</li>
+      </ul>
+    `;
+  }
+
+  if (crop === "sugarcane") {
+    info.innerHTML = `
+      <h2>🍬 Sugarcane Crop</h2>
+      <p>Sugarcane is a commercial crop requiring high temperature and water.</p>
+      <ul>
+        <li>🌱 Best Soil: Black, Alluvial</li>
+        <li>🌡 Climate: 20°C – 35°C</li>
+        <li>💧 Water: High</li>
+        <li>🌱 Sowing: Feb – Mar</li>
+        <li>⏳ Harvest: 10 – 12 months</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Early Shoot Borer</li>
+        <li>Top Borer</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Chlorantraniliprole – Borers</li>
+        <li>Fipronil – Soil Pests</li>
+      </ul>
+    `;
+  }
+
+  if (crop === "maize") {
+    info.innerHTML = `
+      <h2>🌽 Maize Crop</h2>
+      <p>Maize is a cereal crop grown in warm climate.</p>
+      <ul>
+        <li>🌱 Best Soil: Black, Alluvial</li>
+        <li>🌡 Climate: 18°C – 27°C</li>
+        <li>💧 Water: Moderate</li>
+        <li>🌱 Sowing: Jun – Jul</li>
+        <li>⏳ Harvest: 90 – 120 days</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Fall Armyworm</li>
+        <li>Stem Borer</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Emamectin Benzoate – Armyworm</li>
+        <li>Chlorantraniliprole – Stem Borer</li>
+      </ul>
+    `;
+  }
+
+  if (crop === "sunflower") {
+    info.innerHTML = `
+      <h2>🌻 Sunflower Crop</h2>
+      <p>Sunflower is an oilseed crop and drought tolerant.</p>
+      <ul>
+        <li>🌱 Best Soil: Black, Red</li>
+        <li>🌡 Climate: 20°C – 30°C</li>
+        <li>💧 Water: Low</li>
+        <li>🌱 Sowing: Jun – Jul</li>
+        <li>⏳ Harvest: 90 – 100 days</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Head Borer</li>
+        <li>Aphids</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Spinosad – Head Borer</li>
+        <li>Imidacloprid – Aphids</li>
+      </ul>
+    `;
+  }
+
+  if (crop === "rice") {
+    info.innerHTML = `
+      <h2>🍚 Rice Crop</h2>
+      <p>Rice requires standing water and warm climate.</p>
+      <ul>
+        <li>🌱 Best Soil: Clay, Alluvial</li>
+        <li>🌡 Climate: 20°C – 35°C</li>
+        <li>💧 Water: Very High</li>
+        <li>🌱 Sowing: Jun – Jul</li>
+        <li>⏳ Harvest: 120 – 150 days</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Stem Borer</li>
+        <li>Brown Planthopper</li>
+        <li>Leaf Folder</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Chlorantraniliprole – Stem Borer</li>
+        <li>Buprofezin – Brown Planthopper</li>
+        <li>Flubendiamide – Leaf Folder</li>
+      </ul>
+    `;
+  }
+
+  if (crop === "chickpea") {
+    info.innerHTML = `
+      <h2>🫘 Chickpea Crop</h2>
+      <p>Chickpea is a pulse crop that improves soil fertility.</p>
+      <ul>
+        <li>🌱 Best Soil: Black, Red</li>
+        <li>🌡 Climate: 18°C – 25°C</li>
+        <li>💧 Water: Low</li>
+        <li>🌱 Sowing: Oct – Nov</li>
+        <li>⏳ Harvest: 90 – 110 days</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Pod Borer</li>
+        <li>Aphids</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Emamectin Benzoate – Pod Borer</li>
+        <li>Imidacloprid – Aphids</li>
+      </ul>
+    `;
+  }
+
+  if (crop === "pigeonpea") {
+    info.innerHTML = `
+      <h2>🌱 Pigeon Pea Crop</h2>
+      <p>Pigeon pea is drought tolerant and improves nitrogen content.</p>
+      <ul>
+        <li>🌱 Best Soil: Black, Red</li>
+        <li>🌡 Climate: 20°C – 30°C</li>
+        <li>💧 Water: Low</li>
+        <li>🌱 Sowing: Jun – Jul</li>
+        <li>⏳ Harvest: 150 – 180 days</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Pod Fly</li>
+        <li>Pod Borer</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Dimethoate – Pod Fly</li>
+        <li>Emamectin Benzoate – Pod Borer</li>
+      </ul>
+    `;
+  }
+
+  if (crop === "groundnut") {
+    info.innerHTML = `
+      <h2>🥜 Groundnut Crop</h2>
+      <p>Groundnut is an oilseed crop grown well in black soil.</p>
+      <ul>
+        <li>🌱 Best Soil: Black Soil</li>
+        <li>🌡 Climate: 20°C – 30°C</li>
+        <li>💧 Water: Moderate</li>
+        <li>🌱 Sowing: Jun – Jul</li>
+        <li>⏳ Harvest: 100 – 120 days</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Leaf Miner</li>
+        <li>Aphids</li>
+        <li>Thrips</li>
+        <li>White Grub</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Spinosad – Leaf Miner</li>
+        <li>Imidacloprid – Aphids & Thrips</li>
+        <li>Chlorpyrifos – White Grub</li>
+      </ul>
+    `;
+  }
+
+  if (crop === "tomato") {
+    info.innerHTML = `
+      <h2>🍅 Tomato Crop</h2>
+      <p>Tomato is a vegetable crop requiring well-drained soil.</p>
+      <ul>
+        <li>🌱 Best Soil: Loamy, Red</li>
+        <li>🌡 Climate: 18°C – 30°C</li>
+        <li>💧 Water: Moderate</li>
+        <li>🌱 Sowing: Jun – Jul</li>
+        <li>⏳ Harvest: 90 – 120 days</li>
+      </ul>
+
+      <h3>🐛 Major Pests</h3>
+      <ul>
+        <li>Fruit Borer</li>
+        <li>Whitefly</li>
+        <li>Thrips</li>
+      </ul>
+
+      <h3>🧪 Recommended Pesticides</h3>
+      <ul>
+        <li>Spinosad – Fruit Borer</li>
+        <li>Imidacloprid – Whitefly</li>
+        <li>Fipronil – Thrips</li>
+      </ul>
+    `;
+  }
+}
+</script>

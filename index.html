@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Farmer Assistance & Welfare Platform</title>
+        <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: #f4f9f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #1b5e20;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        h2 {
+            color: #2e7d32;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Digital Farmer Assistance & Welfare Platform (FAWP)</h1>
+    <p>Empowering Farmers Through Digital Technology</p>
+</header>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<div class="container">
+    <section id="about">
+        <h2>About FAWP</h2>
+        <p>
+            The Digital Farmer Assistance & Welfare Platform (FAWP) is a technology-based system designed
+            to support farmers by providing easy digital access to agricultural services and government
+            welfare schemes. It helps farmers make informed decisions, improve productivity, and enhance
+            their overall socio-economic condition.
+        </p>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="features">
+            <div class="card" onclick="openWeatherPage()" style="cursor:pointer;">
+             <h3>🌦 Weather Updates</h3>
+                <p>Get real-time weather forecasts, rainfall alerts, and seasonal predictions to plan farming activities efficiently.</p>
+            </div>
+
+
+            <div class="card" onclick="openServerPage()" style="cursor:pointer;">
+                <h3>🌱 Crop Guidance</h3>
+                <p>Expert advice on crop selection, sowing, irrigation, and pest control.Modern and sustainable farming techniques to increase yield and reduce risk.</p>
+            </div>
+            <div class="card">
+                <h3>📊 Market Prices</h3>
+                <p>Latest market rates to ensure fair pricing and better profit for farmers.</p>
+            </div>
+            <div class="card" onclick="openSchemesPage()" style="cursor:pointer;">
+                <h3>🏛️ Government Schemes</h3>
+                <p>Explore central and state government schemes for farmers, including subsidies,insurance, and financial assistance programs.</p>
+            </div>
+
+        <script>
+  function openWeatherPage() {
+    window.location.href = "weather1.html";
+  }
+  function openServerPage(){
+    window.location.href="BestPracticesServer.html";
+  }
+  function openSchemesPage(){
+    window.location.href="Schemes.html";
+  }
+</script>
+
+        </div>
+    </section>
+
+    <section id="benefits">
+        <h2>Welfare & Benefits</h2>
+        <p>
+            FAWP ensures transparent and efficient delivery of government welfare schemes, subsidies,
+            and insurance benefits. By minimizing manual processes and intermediaries, the platform
+            guarantees timely assistance and accountability.
+        </p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: support@fawp.gov</p>
+        <p>Helpline: 1800-123-456</p>
+    </section>
+</div>
+
+<footer>
+    <p>© 2026 Digital Farmer Assistance & Welfare Platform | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>
